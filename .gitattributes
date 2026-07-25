@@ -1,0 +1,17 @@
+# Normalise line endings on checkin.
+* text=auto eol=lf
+
+*.js    text
+*.css   text
+*.html  text
+*.json  text
+*.md    text
+*.yml   text
+
+*.wasm  binary
+*.png   binary
+*.plugin binary
+
+# Vendored code is not ours — keep it out of language stats and diffs.
+vendors/** linguist-vendored
+package-lock.json -diff linguist-generated

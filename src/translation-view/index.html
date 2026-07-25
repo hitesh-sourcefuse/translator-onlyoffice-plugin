@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cell Translator — Translation</title>
+    <script src="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins.js"></script>
+    <script src="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins-ui.js"></script>
+    <link rel="stylesheet" href="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins.css">
+    <link rel="stylesheet" href="styles/plugin.css">
+</head>
+<body>
+    <div id="plugin-container">
+
+        <!-- Cell view -->
+        <div id="view-cell" class="view">
+            <div id="lang-override" class="lang-override hidden">
+                <select id="lang-from" class="lang-select"></select>
+                <span class="lang-arrow">→</span>
+                <select id="lang-to" class="lang-select"></select>
+            </div>
+            <div id="lang-indicator" class="lang-indicator hidden"></div>
+<div id="cell-content" class="cell-content">
+                <div id="no-translation" class="cell-empty hidden">No translation for this cell</div>
+                <div id="translations-list"></div>
+            </div>
+            <div id="cell-footer" class="cell-footer hidden">
+                <div class="cell-footer-meta">
+                    <span id="cell-ref" class="cell-ref-label"></span>
+                    <span id="cell-date"></span>
+                    <span id="cell-stale" class="cell-stale hidden">⚠ Source changed</span>
+                </div>
+                <div class="cell-footer-actions">
+                    <button id="btn-revert" class="btn-link btn-revert hidden">Revert</button>
+                    <button id="btn-improve-ai" class="btn-ai hidden">Improve with AI</button>
+                    <button id="btn-alternatives" class="btn-alt hidden">Alternatives</button>
+                    <button id="btn-history" class="btn-link hidden">History</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cell-level history view -->
+        <div id="view-cell-history" class="view hidden">
+            <div class="alt-toolbar">
+                <button id="btn-history-back" class="btn-link">← Back</button>
+            </div>
+            <div id="cell-history-list" class="cell-history-list"></div>
+        </div>
+
+        <!-- Alternatives view -->
+        <div id="view-alternatives" class="view hidden">
+            <div class="alt-toolbar">
+                <button id="btn-alt-back" class="btn-link">← Back</button>
+                <div class="alt-toolbar-actions">
+                    <button id="btn-copy-source" class="btn-copy-source" title="Copy source text">📋 Copy Source</button>
+                    <button id="btn-save-alt" class="btn-alt-save">Save</button>
+                </div>
+            </div>
+
+            <select id="alt-select" class="alt-dropdown"></select>
+            <div id="alternatives-preview" class="alternatives-preview"></div>
+            <textarea id="alt-user-input" class="alt-user-textarea hidden" placeholder="Type your own translation here…" rows="4"></textarea>
+            <div id="alt-source-text" class="hidden"></div>
+        </div>
+
+        <!-- Document-level translations view -->
+        <div id="view-history" class="view hidden">
+            <div class="view-header">
+                <button id="btn-back" class="btn-link">← Back</button>
+                <span class="view-header-sep">|</span>
+                <span>Translations</span>
+            </div>
+            <div class="history-filter">
+                <span class="filter-label">Filters:</span>
+                <select id="filter-scope">
+                    <option value="selection" selected>Current Selection</option>
+                    <option value="sheet">Current Sheet</option>
+                    <option value="all">All Sheets</option>
+                </select>
+                <select id="filter-status">
+                    <option value="">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="replaced">Replaced</option>
+                    <option value="removed">Removed</option>
+                </select>
+            </div>
+            <div id="history-list" class="history-list"></div>
+        </div>
+
+        <div id="status" class="status"></div>
+    </div>
+
+    <script src="scripts/translation-view.js"></script>
+</body>
+</html>

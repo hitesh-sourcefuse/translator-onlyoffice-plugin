@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Cell Translator</title>
+    <link rel="stylesheet" href="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins.css">
+</head>
+<body style="padding: 20px; font-family: Arial, sans-serif; font-size: 13px;">
+    <h3>Cell Translator</h3>
+    <p>Translates spreadsheet cells in place and keeps a record of every
+       translation inside the workbook itself.</p>
+
+    <p>The record lives in a hidden <code>_CellTranslator</code> sheet, so it
+       travels with the file when it is copied, emailed or renamed. Repeated
+       text is translated once and reused, and any translated cell can be
+       reverted to its original.</p>
+
+    <p>Three engines are available:</p>
+    <ul>
+        <li><b>Bergamot</b> — runs locally via WebAssembly. No server, works
+            offline. Language models are downloaded once and cached.</li>
+        <li><b>LibreTranslate</b> — a self-hosted server. The only engine that
+            can suggest alternative translations.</li>
+        <li><b>AI</b> — any OpenAI-compatible endpoint. Also used to refine a
+            single cell with "Improve with AI".</li>
+    </ul>
+    <p>Version: 1.0.0</p>
+</body>
+</html>

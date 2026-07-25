@@ -1,0 +1,58 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text-primary);
+}
+#sync-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 24px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    gap: 14px;
+    background: var(--bg);
+    color: var(--text-primary);
+}
+.sync-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+.sync-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 200px;
+}
+.sync-buttons button {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: bold;
+}
+#sync-status {
+    font-size: 12px;
+    color: var(--text-muted);
+    min-height: 16px;
+}
+#sync-status.error {
+    color: #d32f2f;
+}
+#sync-status.success {
+    color: #2e7d32;
+}
+#sync-spinner {
+    display: none;
+}
+#sync-spinner.active {
+    display: block;
+}

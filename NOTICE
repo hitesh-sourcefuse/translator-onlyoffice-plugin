@@ -1,0 +1,55 @@
+Cell Translator — ONLYOFFICE Spreadsheet plugin
+Copyright (c) 2026 Hitesh Baliyan
+
+This product is licensed under the MIT License (see LICENSE).
+
+It bundles third-party components under `vendors/`, each retaining its own
+licence and copyright. The terms below apply to those components, not to the
+MIT-licensed code in this repository.
+
+--------------------------------------------------------------------------------
+efficient-language-detector-js ("eld")  —  vendors/eld/
+--------------------------------------------------------------------------------
+Copyright (c) Nito T.M.
+Licensed under the Apache License, Version 2.0.
+Full licence text: vendors/eld/LICENSE
+Homepage: https://github.com/nitotm/efficient-language-detector-js
+
+Used for offline source-language detection. Vendored unmodified via
+`npm run vendor-eld`.
+
+--------------------------------------------------------------------------------
+@mkljczk/bergamot-translator  —  vendors/bergamot-translator/
+--------------------------------------------------------------------------------
+Homepage: https://www.npmjs.com/package/@mkljczk/bergamot-translator
+
+A packaging of the Bergamot translation engine, which derives from the Mozilla
+Bergamot / firefox-translations project:
+  https://github.com/mozilla/bergamot-translator
+  https://github.com/browsermt/bergamot-translator
+
+Used for offline neural machine translation (WebAssembly). Vendored unmodified
+via `npm run vendor-bergamot`.
+
+NOTE ON LICENSING
+The published npm package does not include a LICENSE file and declares no
+`license` field in its package.json. Its upstream projects are distributed under
+the Mozilla Public License 2.0 (Bergamot / firefox-translations), and the
+Marian NMT components it builds on are distributed under the MIT License.
+
+Because the redistributed package states no terms of its own, downstream users
+who redistribute this repository — or the built `.plugin` artifact, which embeds
+`bergamot-translator-worker.wasm` — should satisfy themselves as to the
+applicable terms before doing so. Anyone able to clarify the licensing of the
+upstream package is encouraged to open an issue.
+
+Language models are NOT bundled. They are downloaded at runtime from Mozilla's
+public model repository and cached locally in the browser's IndexedDB.
+
+--------------------------------------------------------------------------------
+Runtime services (not bundled)
+--------------------------------------------------------------------------------
+LibreTranslate — optional, self-hosted. https://libretranslate.com/  (AGPL-3.0)
+Contacted over HTTP only; no LibreTranslate code is included here.
+
+OpenAI-compatible endpoints — optional, user-supplied. Contacted over HTTP only.

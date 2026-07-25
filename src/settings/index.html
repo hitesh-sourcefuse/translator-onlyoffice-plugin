@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cell Translator Settings</title>
+    <script src="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins.js"></script>
+    <script src="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins-ui.js"></script>
+    <link rel="stylesheet" href="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins.css">
+    <link rel="stylesheet" href="styles/plugin.css">
+</head>
+<body>
+    <div id="plugin-container">
+        <div id="settings-scroll">
+            <h3 class="settings-title">Settings</h3>
+
+            <!-- Section 1: Translation Engine (open by default) -->
+            <details class="accordion" id="acc-engine" open>
+                <summary>Translation Engine</summary>
+                <div class="acc-body">
+                    <label for="translation-engine">Engine</label>
+                    <select id="translation-engine">
+                        <option value="bergamot">Bergamot (Offline)</option>
+                        <option value="libre">LibreTranslate</option>
+                        <option value="ai">AI (LLM)</option>
+                    </select>
+                    <div id="engine-hint" class="hint">Offline translation via WebAssembly — no server needed</div>
+
+                    <!-- Bergamot options -->
+                    <div id="section-bergamot">
+                        <label>Quality</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="bergamot-quality" value="tiny" /> Tiny — fastest, ~25MB</label>
+                            <label><input type="radio" name="bergamot-quality" value="base-memory" checked /> Balanced — good quality, ~44MB</label>
+                            <label><input type="radio" name="bergamot-quality" value="base" /> Best — highest quality, ~60MB</label>
+                        </div>
+
+                        <div class="lang-row">
+                            <div class="lang-col" style="flex:1">
+                                <label for="target-langs">Target Language</label>
+                                <select id="target-langs">
+                                    <option value="en" selected>English</option>
+                                    <option value="ja">Japanese</option>
+                                    <option value="zh">Chinese</option>
+                                    <option value="ko">Korean</option>
+                                    <option value="fr">French</option>
+                                    <option value="de">German</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="ru">Russian</option>
+                                    <option value="pt">Portuguese</option>
+                                    <option value="it">Italian</option>
+                                    <option value="ar">Arabic</option>
+                                    <option value="th">Thai</option>
+                                    <option value="vi">Vietnamese</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hint">Source language is auto-detected</div>
+
+                        <label>Language Models</label>
+                        <div id="model-list" class="model-list">
+                            <div class="model-empty">No models cached yet. Models download automatically on first use.</div>
+                        </div>
+                        <button id="btn-add-model" class="btn-secondary" style="margin-top:4px">+ Add language pair</button>
+                        <div id="add-model-row" class="add-model-row hidden">
+                            <select id="add-model-from"><option value="ja">Japanese</option><option value="en">English</option><option value="zh">Chinese</option><option value="ko">Korean</option><option value="fr">French</option><option value="de">German</option><option value="es">Spanish</option></select>
+                            <span>→</span>
+                            <select id="add-model-to"><option value="en">English</option><option value="ja">Japanese</option><option value="zh">Chinese</option><option value="ko">Korean</option><option value="fr">French</option><option value="de">German</option><option value="es">Spanish</option></select>
+                            <button id="btn-download-model" class="btn-secondary">↓</button>
+                            <button id="btn-cancel-add" class="btn-secondary">✕</button>
+                        </div>
+                    </div>
+
+                    <!-- LibreTranslate options -->
+                    <div id="section-libre" style="display:none">
+                        <label for="libre-url">Server URL</label>
+                        <input type="text" id="libre-url" value="http://localhost:15065" />
+                        <label for="concurrent-connections">Concurrent connections (1–10)</label>
+                        <input type="number" id="concurrent-connections" min="1" max="10" value="5" style="width:80px" />
+                    </div>
+                </div>
+            </details>
+
+            <!-- Section 2: AI Enhancement -->
+            <details class="accordion" id="acc-ai">
+                <summary>AI Enhancement</summary>
+                <div class="acc-body">
+                    <label class="toggle">
+                        <input type="checkbox" id="ai-enabled" />
+                        Enable AI (refine translations)
+                    </label>
+                    <div class="hint">AI can improve translations from the engine above</div>
+                    <div id="section-ai-config" style="display:none">
+                        <label for="ai-endpoint">Endpoint URL</label>
+                        <input type="text" id="ai-endpoint" placeholder="http://localhost:1234/v1" />
+                        <label for="ai-api-key">API Key</label>
+                        <input type="password" id="ai-api-key" placeholder="Optional for local models" />
+                        <label for="ai-model">Model</label>
+                        <div class="input-with-btn">
+                            <select id="ai-model"><option value="">-- Click ↻ to load --</option></select>
+                            <button id="btn-fetch-models" class="btn-fetch">↻</button>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Section 3: Behavior -->
+            <details class="accordion" id="acc-behavior">
+                <summary>Behavior</summary>
+                <div class="acc-body">
+                    <label>Scope</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="scope" value="selection" /> Selected cells</label>
+                        <label><input type="radio" name="scope" value="sheet" checked /> Active sheet</label>
+                        <label><input type="radio" name="scope" value="workbook" /> All sheets</label>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" id="translate-shapes" checked />
+                        Also translate text in drawn shapes
+                    </label>
+                    <label>Display Mode</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="display-mode" value="preview" checked /> Preview — keep original, show translation in panel</label>
+                        <label><input type="radio" name="display-mode" value="replace" /> Replace — replace cell with translation</label>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" id="auto-commit" />
+                        Auto-commit cache to document
+                    </label>
+
+                    <div class="override-section">
+                        <label class="override-header">Per-file override</label>
+                        <div id="current-file-path" class="file-path"></div>
+                        <div id="file-rename-banner" class="file-rename-banner hidden">
+                            <span id="file-rename-msg"></span>
+                            <button id="btn-update-record" class="btn-link">Update record</button>
+                        </div>
+                        <div class="hint">Override global settings for this file only</div>
+                        <div class="override-row">
+                            <div class="override-col">
+                                <label>Scope</label>
+                                <select id="file-scope">
+                                    <option value="">Use global</option>
+                                    <option value="selection">Selected cells</option>
+                                    <option value="sheet">Active sheet</option>
+                                    <option value="workbook">All sheets</option>
+                                </select>
+                            </div>
+                            <div class="override-col">
+                                <label>Display</label>
+                                <select id="file-display-mode">
+                                    <option value="">Use global</option>
+                                    <option value="preview">Preview</option>
+                                    <option value="replace">Replace</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Section 5: Debug -->
+            <details class="accordion" id="acc-debug">
+                <summary>Debug</summary>
+                <div class="acc-body">
+                    <label class="toggle">
+                        <input type="checkbox" id="debug-enabled" />
+                        Show debug log panel
+                    </label>
+                    <div class="hint">Displays a log panel at the bottom of every plugin window</div>
+                </div>
+            </details>
+
+            <!-- Section 6: Cache & Data -->
+            <details class="accordion" id="acc-cache">
+                <summary>Cache &amp; Data</summary>
+                <div class="acc-body">
+                    <label>Model Cache</label>
+                    <div class="db-stats">
+                        <div class="db-stat-row"><span>Total cached</span><span id="cache-total-size">—</span></div>
+                    </div>
+                    <button id="btn-clear-model-cache" class="btn-secondary">Clear all models</button>
+
+                    <label style="margin-top:12px">Translation Database</label>
+                    <div class="db-stats">
+                        <div class="db-stat-row"><span>Rows used</span><span id="db-rows">—</span></div>
+                        <div class="db-stat-row"><span>Active cells</span><span id="db-active">—</span></div>
+                        <div class="db-stat-row"><span>History</span><span id="db-max-history">—</span></div>
+                    </div>
+                    <div class="btn-row">
+                        <button id="btn-compact-history" class="btn-secondary">Compact history</button>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+        <pre id="log-panel" class="log-panel"></pre>
+        <div id="status" class="status"></div>
+    </div>
+
+    <script src="scripts/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Lint and build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Package
+        run: node scripts/pack.js
+
+      # Catches a build that silently drops a panel or the vendored engine.
+      - name: Verify package contents
+        run: |
+          set -euo pipefail
+          test -f translator-plugin.plugin
+          for f in config.json background.html panel.html settings.html \
+                   translation-view.html sync.html \
+                   scripts/background.js styles/plugin.css \
+                   vendor/bergamot/worker/bergamot-translator-worker.wasm; do
+            unzip -l translator-plugin.plugin | grep -q " $f\$" \
+              || { echo "missing from package: $f"; exit 1; }
+          done
+          echo "package contents OK"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: translator-plugin
+          path: translator-plugin.plugin
+          if-no-files-found: error
+          retention-days: 14

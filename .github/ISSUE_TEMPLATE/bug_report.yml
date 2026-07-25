@@ -1,0 +1,78 @@
+name: Bug report
+description: Something does not work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. The debug log is usually what makes a bug
+        diagnosable — please include it if you can.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open a spreadsheet containing ...
+        2. Toolbar → Cell Translator → ...
+        3. ...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: engine
+    attributes:
+      label: Translation engine
+      options:
+        - Bergamot (offline)
+        - LibreTranslate
+        - AI (OpenAI-compatible)
+        - Not applicable
+    validations:
+      required: true
+
+  - type: input
+    id: onlyoffice
+    attributes:
+      label: ONLYOFFICE version
+      placeholder: "e.g. 9.4.0 Desktop, macOS 15"
+    validations:
+      required: true
+
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Plugin version
+      placeholder: "e.g. v1.0.0, or a commit SHA"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Debug log
+      description: |
+        Turn on **Debug logging** in Settings, reproduce the problem, then paste
+        the console output. Lines beginning `[BG-WATCH]`, `[SIDECAR]` and
+        `[BERGAMOT]` are the useful ones.
+
+        Please remove any confidential cell content first.
+      render: text
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Screenshots, a sample file, or other context.
+    validations:
+      required: false

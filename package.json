@@ -1,0 +1,36 @@
+{
+  "name": "translator-onlyoffice-plugin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ONLYOFFICE spreadsheet plugin that translates cells and shape text in place, storing translation memory inside the workbook.",
+  "license": "MIT",
+  "author": "Hitesh Baliyan",
+  "keywords": [
+    "onlyoffice",
+    "onlyoffice-plugin",
+    "spreadsheet",
+    "translation",
+    "machine-translation",
+    "bergamot",
+    "libretranslate",
+    "offline-translation"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/build.js --watch",
+    "build": "node scripts/build.js",
+    "lint": "biome check src/ scripts/",
+    "lint:fix": "biome check --fix src/ scripts/",
+    "pack": "npm run build && node scripts/pack.js",
+    "clean": "rm -rf dist *.plugin",
+    "vendor-bergamot": "FILE=$(npm pack @mkljczk/bergamot-translator) && rm -rf vendors/bergamot-translator && mkdir -p vendors/bergamot-translator && tar -xzf \"$FILE\" -C vendors/bergamot-translator --strip-components=1 && rm \"$FILE\"",
+    "vendor-eld": "FILE=$(npm pack eld) && rm -rf vendors/eld && mkdir -p vendors/eld && tar -xzf \"$FILE\" -C vendors/eld --strip-components=1 && rm \"$FILE\""
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.10",
+    "vite": "^8.0.3"
+  }
+}

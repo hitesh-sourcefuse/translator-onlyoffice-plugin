@@ -1,0 +1,219 @@
+/* Settings-specific styles */
+
+/* Accordion */
+.accordion {
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+.accordion summary {
+    padding: 8px 12px;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    color: var(--text-primary);
+    background: var(--surface);
+    border-radius: 4px;
+    user-select: none;
+    list-style: none;
+}
+.accordion summary::before {
+    content: "\25B6 ";
+    font-size: 10px;
+}
+.accordion[open] summary::before {
+    content: "\25BC ";
+}
+.accordion summary::-webkit-details-marker {
+    display: none;
+}
+.acc-body {
+    padding: 8px 12px 12px;
+}
+
+/* Hint text */
+.hint {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 8px;
+}
+
+/* Model list */
+.model-list {
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    margin-bottom: 4px;
+    max-height: 180px;
+    overflow-y: auto;
+}
+.model-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 12px;
+}
+.model-row:last-child {
+    border-bottom: none;
+}
+.model-pair {
+    font-weight: 600;
+    flex: 1;
+}
+.model-status {
+    color: var(--text-muted);
+    font-size: 11px;
+    margin: 0 8px;
+}
+.model-status.cached {
+    color: #2e7d32;
+}
+.model-status.downloading {
+    color: #1976d2;
+}
+.model-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--text-muted);
+}
+.model-btn:hover {
+    background: var(--surface-hover);
+}
+.model-btn.delete {
+    color: #c62828;
+}
+.model-empty {
+    padding: 12px 8px;
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 12px;
+}
+
+/* Add model row */
+.add-model-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+    font-size: 12px;
+}
+.add-model-row select {
+    width: auto;
+    flex: 1;
+    margin-bottom: 0;
+}
+.add-model-row .btn-secondary {
+    padding: 4px 8px;
+}
+
+/* Per-file override */
+.override-section {
+    border-top: 1px solid var(--border-light);
+    margin-top: 12px;
+    padding-top: 10px;
+}
+.override-header {
+    /* biome-ignore lint/complexity/noImportantStyles: overrides the generic label rule above */
+    font-weight: 700 !important;
+    /* biome-ignore lint/complexity/noImportantStyles: overrides the generic label rule above */
+    margin-bottom: 2px !important;
+}
+.override-row {
+    display: flex;
+    gap: 8px;
+}
+.override-col {
+    flex: 1;
+    min-width: 0;
+}
+.override-col select {
+    width: 100%;
+}
+
+.log-panel {
+    min-height: 40px;
+    max-height: 150px;
+    overflow-y: auto;
+    font-size: 10px;
+    font-family: monospace;
+    color: var(--text-muted);
+    background: var(--surface);
+    border-top: 1px solid var(--border-light);
+    padding: 4px 8px;
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    flex-shrink: 0;
+    user-select: text;
+    -webkit-user-select: text;
+    cursor: text;
+    resize: vertical;
+}
+
+.input-with-btn {
+    display: flex;
+    gap: 4px;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+.input-with-btn input[type="text"] {
+    flex: 1;
+    margin-bottom: 0;
+}
+.btn-fetch {
+    padding: 6px 10px;
+    font-size: 14px;
+    line-height: 1;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--text-primary);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.btn-fetch:hover {
+    background: var(--surface-hover);
+}
+.btn-fetch:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.ai-model-dropdown {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    font-size: 12px;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    box-sizing: border-box;
+}
+.ai-model-dropdown:focus {
+    outline: none;
+    border-color: #4c8bf5;
+}
+
+input[type="password"] {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 12px;
+    margin-bottom: 8px;
+    background: var(--input-bg);
+    color: var(--text-primary);
+}
+input[type="password"]:focus {
+    outline: none;
+    border-color: #4c8bf5;
+}

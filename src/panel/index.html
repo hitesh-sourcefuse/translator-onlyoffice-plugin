@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cell Translator</title>
+    <script src="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins.js"></script>
+    <script src="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins-ui.js"></script>
+    <link rel="stylesheet" href="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins.css">
+    <link rel="stylesheet" href="styles/plugin.css">
+</head>
+<body>
+    <div id="plugin-container">
+
+        <!-- Config view: shown when idle/ready -->
+        <div id="view-config" class="view">
+
+            <div class="lang-row">
+                <div class="lang-col" style="flex:1">
+                    <label>Translate To</label>
+                    <select id="target-langs" multiple>
+                        <option value="en" selected>English</option>
+                        <option value="ja">Japanese</option>
+                        <option value="zh">Chinese</option>
+                        <option value="ko">Korean</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="es">Spanish</option>
+                    </select>
+                </div>
+            </div>
+            <div class="hint" style="margin-top:2px;font-size:11px;color:#888">Source language is auto-detected</div>
+
+            <div class="scope-row">
+                <label class="radio-label"><input type="radio" name="scope" value="sheet" checked /> Sheet</label>
+                <label class="radio-label"><input type="radio" name="scope" value="workbook" /> Workbook</label>
+            </div>
+
+            <button id="btn-translate" class="btn-primary" disabled>Execute Translation</button>
+        </div>
+
+        <!-- Status bar: always visible at the bottom -->
+        <div id="status" class="status"></div>
+
+    </div>
+
+    <script src="scripts/panel.js"></script>
+</body>
+</html>

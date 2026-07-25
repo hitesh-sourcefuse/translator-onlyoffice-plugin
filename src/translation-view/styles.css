@@ -1,0 +1,63 @@
+/* Translation view specific styles */
+
+/* Language override dropdowns */
+.lang-override {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px 2px;
+}
+.lang-override.hidden {
+    display: none;
+}
+.lang-select {
+    flex: 1;
+    font-size: 11px;
+    padding: 3px 4px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #fff;
+    color: #333;
+}
+.lang-select:focus {
+    border-color: #667eea;
+    outline: none;
+}
+.lang-arrow {
+    font-size: 13px;
+    color: #888;
+    flex-shrink: 0;
+}
+
+/* Language indicator (source → target) */
+.lang-indicator {
+    text-align: right;
+    font-size: 11px;
+    font-weight: 600;
+    color: #667eea;
+    padding: 4px 10px 0;
+    letter-spacing: 0.3px;
+}
+.lang-indicator.hidden {
+    display: none;
+}
+
+/* AI Improve button */
+.btn-ai {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+.btn-ai:hover {
+    opacity: 0.85;
+}
+.btn-ai:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

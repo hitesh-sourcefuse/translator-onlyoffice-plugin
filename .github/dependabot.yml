@@ -1,0 +1,17 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    # vendors/ is committed deliberately and refreshed via the vendor-* scripts,
+    # not by Dependabot.
+    ignore:
+      - dependency-name: eld
+      - dependency-name: "@mkljczk/bergamot-translator"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

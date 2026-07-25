@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="title desc">
+  <title id="title">Cell Translator</title>
+  <desc id="desc">A spreadsheet grid with a translated cell</desc>
+
+  <defs>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#667eea"/>
+      <stop offset="100%" stop-color="#764ba2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- sheet -->
+  <rect x="12" y="14" width="104" height="100" rx="10" fill="#ffffff" stroke="#c9d2e3" stroke-width="3"/>
+
+  <!-- header row -->
+  <path d="M12 24a10 10 0 0 1 10-10h84a10 10 0 0 1 10 10v12H12z" fill="url(#accent)"/>
+
+  <!-- grid lines -->
+  <g stroke="#dfe5f0" stroke-width="2.5" stroke-linecap="round">
+    <path d="M12 62h104M12 88h104"/>
+    <path d="M46 36v78M81 36v78"/>
+  </g>
+
+  <!-- source cell: CJK glyph -->
+  <text x="29" y="55" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="20"
+        font-weight="700" fill="#4a5568" text-anchor="middle">文</text>
+
+  <!-- translated cell: latin glyph -->
+  <text x="98.5" y="81" font-family="Arial,Helvetica,sans-serif" font-size="20"
+        font-weight="700" fill="url(#accent)" text-anchor="middle">A</text>
+
+  <!-- arrow from source to translated -->
+  <g stroke="url(#accent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M40 62.5h24"/>
+    <path d="M58 56.5l6 6-6 6"/>
+  </g>
+</svg>

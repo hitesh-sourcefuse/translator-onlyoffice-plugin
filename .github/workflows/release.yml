@@ -1,0 +1,90 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing tag to build and release (e.g. v1.0.0)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref }}
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Resolve version
+        id: version
+        run: |
+          set -euo pipefail
+          TAG="${{ github.event.inputs.tag || github.ref_name }}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "number=${TAG#v}" >> "$GITHUB_OUTPUT"
+
+      # A tag that disagrees with the manifest ships a plugin that reports the
+      # wrong version to ONLYOFFICE, so fail loudly instead.
+      - name: Check tag matches manifest and package.json
+        run: |
+          set -euo pipefail
+          WANT="${{ steps.version.outputs.number }}"
+          PKG=$(node -p "require('./package.json').version")
+          CFG=$(node -p "require('./static/config.json').version")
+          echo "tag=$WANT package.json=$PKG config.json=$CFG"
+          [ "$PKG" = "$WANT" ] || { echo "package.json version ($PKG) != tag ($WANT)"; exit 1; }
+          [ "$CFG" = "$WANT" ] || { echo "static/config.json version ($CFG) != tag ($WANT)"; exit 1; }
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Package
+        run: npm run pack
+
+      - name: Rename artifact
+        id: artifact
+        run: |
+          set -euo pipefail
+          NAME="cell-translator-${{ steps.version.outputs.tag }}.plugin"
+          cp translator-plugin.plugin "$NAME"
+          sha256sum "$NAME" > "$NAME.sha256"
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: ${{ steps.version.outputs.tag }}
+          generate_release_notes: true
+          draft: false
+          prerelease: ${{ contains(steps.version.outputs.tag, '-') }}
+          files: |
+            ${{ steps.artifact.outputs.name }}
+            ${{ steps.artifact.outputs.name }}.sha256
+          body: |
+            ## Install
+
+            Download `${{ steps.artifact.outputs.name }}` below, then in ONLYOFFICE:
+            **Plugins → Settings → Add plugin** and select the file.
+
+            Requires ONLYOFFICE 9.4 or newer (spreadsheets only).
+
+            Verify the download with the accompanying `.sha256` file.
