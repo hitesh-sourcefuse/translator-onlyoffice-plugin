@@ -29,7 +29,9 @@ Prepares the plugin for submission to the ONLYOFFICE Plugin Marketplace.
   submissions use. It records Bergamot Translator under its upstream MPL-2.0
   terms — the npm package we vendor ships no licence of its own, and this is
   how the official ONLYOFFICE bergamot plugin documents the same engine.
-- Marketplace listing icons under `resources/store/icons`.
+- Marketplace listing icons under `resources/store/icons`, sized 120×60 and
+  up. The listing card wants a landscape banner, not the square icon the
+  editor toolbar uses — `ai` and `zotero` both ship 120×60 / 240×120.
 
 ## [1.0.1] — 2026-07-25
 
