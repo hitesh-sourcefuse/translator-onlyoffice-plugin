@@ -2,7 +2,7 @@
     "name": "Cell Translator",
     "nameLocale": {},
     "guid": "asc.{B5B3B3B5-1234-4C5D-9A8B-7E6F5D4C3B2A}",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "minVersion": "9.4.0",
     "offered": "",
 
@@ -10,7 +10,7 @@
         {
             "description": "Background controller for Cell Translator — auto-translates cells and opens panel on demand",
             "url": "background.html",
-            "icons": ["resources/light/icon.png"],
+            "icons": "resources/%theme-type%(light|dark)/icon%scale%(default).%extension%(png)",
             "isViewer": false,
             "EditorsSupport": ["cell"],
             "type": "background",
