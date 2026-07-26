@@ -35,7 +35,7 @@ ONLYOFFICE host
       │  Asc.plugin.init          (static/config.json declares one window)
       ▼
 ┌──────────────────────────────────────────────┐
-│ background.html → src/background/main.js     │
+│ index.html → src/background/main.js          │
 │   src/shared/watcher.js                      │  ← essentially all logic
 │     · scan / filter / translate              │
 │     · ledger + refs + history                │

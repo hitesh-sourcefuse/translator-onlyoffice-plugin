@@ -46,7 +46,7 @@ jobs:
         run: |
           set -euo pipefail
           test -f translator-plugin.plugin
-          for f in config.json background.html panel.html settings.html \
+          for f in config.json index.html panel.html settings.html \
                    translation-view.html sync.html \
                    scripts/background.js styles/plugin.css \
                    vendor/bergamot/worker/bergamot-translator-worker.wasm; do

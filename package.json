@@ -1,6 +1,6 @@
 {
   "name": "translator-onlyoffice-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "ONLYOFFICE spreadsheet plugin that translates cells and shape text in place, storing translation memory inside the workbook.",
   "license": "MIT",

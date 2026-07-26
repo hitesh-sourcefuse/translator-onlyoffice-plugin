@@ -5,6 +5,32 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] — 2026-07-26
+
+Prepares the plugin for submission to the ONLYOFFICE Plugin Marketplace.
+
+### Changed
+
+- The plugin entry point is now `index.html` rather than `background.html`.
+  Every plugin in the marketplace uses `index.html`, including the
+  background-type ones, and the marketplace guidelines list it as a required
+  file.
+- `config.json` gained the `store` block the Plugin Manager uses to draw the
+  listing card — card background, store icons and categories
+  (`specAbilities`, `work`).
+- `offered` is now set. Left empty, the marketplace would have attributed the
+  plugin to "Ascensio System SIA".
+- The plugin description is now written for the person choosing whether to
+  install it, rather than describing the background controller.
+
+### Added
+
+- `3rd-Party.txt` listing bundled components, in the format ONLYOFFICE
+  submissions use. It records Bergamot Translator under its upstream MPL-2.0
+  terms — the npm package we vendor ships no licence of its own, and this is
+  how the official ONLYOFFICE bergamot plugin documents the same engine.
+- Marketplace listing icons under `resources/store/icons`.
+
 ## [1.0.1] — 2026-07-25
 
 ### Fixed
@@ -48,5 +74,6 @@ First public release.
 - *Improve with AI*, *Alternatives* and *Revert* are not yet wired up for shape
   text — they currently apply to cells only.
 
+[1.0.2]: ../../releases/tag/v1.0.2
 [1.0.1]: ../../releases/tag/v1.0.1
 [1.0.0]: ../../releases/tag/v1.0.0

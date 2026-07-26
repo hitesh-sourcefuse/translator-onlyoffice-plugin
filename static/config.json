@@ -2,24 +2,45 @@
     "name": "Cell Translator",
     "nameLocale": {},
     "guid": "asc.{B5B3B3B5-1234-4C5D-9A8B-7E6F5D4C3B2A}",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "minVersion": "9.4.0",
-    "offered": "",
-
+    "offered": "Hitesh Baliyan",
     "variations": [
         {
-            "description": "Background controller for Cell Translator — auto-translates cells and opens panel on demand",
-            "url": "background.html",
+            "description": "Translate spreadsheet cells and text inside drawn shapes in place. Every translation is remembered inside the workbook, so the record travels with the file. Works offline.",
+            "url": "index.html",
             "icons": "resources/%theme-type%(light|dark)/icon%scale%(default).%extension%(png)",
             "isViewer": false,
-            "EditorsSupport": ["cell"],
+            "EditorsSupport": [
+                "cell"
+            ],
             "type": "background",
             "initDataType": "text",
             "initData": "",
             "initOnSelectionChanged": true,
             "isUpdateOleOnResize": false,
             "buttons": [],
-            "events": ["onToolbarMenuClick", "onDocumentContentReady", "onChangeCurrentSheet", "onContextMenuShow", "onContextMenuClick"]
+            "events": [
+                "onToolbarMenuClick",
+                "onDocumentContentReady",
+                "onChangeCurrentSheet",
+                "onContextMenuShow",
+                "onContextMenuClick"
+            ],
+            "store": {
+                "background": {
+                    "light": "#4a5568",
+                    "dark": "#4a5568"
+                },
+                "icons": {
+                    "light": "resources/store/icons",
+                    "dark": "resources/store/icons"
+                },
+                "categories": [
+                    "specAbilities",
+                    "work"
+                ]
+            }
         }
     ]
 }

@@ -48,10 +48,17 @@ cpSync(resolve(bergamotSrc, "worker"), resolve(bergamotDst, "worker"), {
 console.log("✓ Copied bergamot-translator vendor");
 
 // --- Step 3: Copy HTML files to dist root (flat, renamed) ---
+// The marketplace expects the entry point to be index.html — every published
+// plugin uses that name, background-type ones included.
+const htmlOutputName = { background: "index" };
+
 for (const name of Object.keys(entries)) {
     const srcHtml = resolve(root, `src/${name}/index.html`);
     if (existsSync(srcHtml)) {
-        cpSync(srcHtml, resolve(distDir, `${name}.html`));
+        cpSync(
+            srcHtml,
+            resolve(distDir, `${htmlOutputName[name] || name}.html`),
+        );
     }
 }
 
