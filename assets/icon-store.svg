@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 120 60">
-  <svg x="32" y="2" width="56" height="56" viewBox="0 0 128 128">
+  <g transform="translate(34 4) scale(0.406250)">
   <title id="title">Cell Translator</title>
   <desc id="desc">A spreadsheet grid with a translated cell</desc>
 
@@ -35,5 +35,5 @@
     <path d="M40 62.5h24"/>
     <path d="M58 56.5l6 6-6 6"/>
   </g>
-</svg>
+</g>
 </svg>
