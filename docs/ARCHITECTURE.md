@@ -148,6 +148,8 @@ trims afterwards, so a failure cannot wipe the cache.
 
 ```
 src/<name>/index.html  ──copy, flattened──→  dist/<name>.html
+                          (background → index.html, the name the marketplace
+                           and every published plugin uses)
 src/<name>/main.js     ──vite, IIFE, min──→  dist/scripts/<name>.js
    CSS from each entry ──merge, dedupe────→  dist/styles/plugin.css
 static/*, vendors/bergamot-translator/*  ──copy──→  dist/
@@ -155,6 +157,12 @@ dist/  ──zip──→  translator-plugin.plugin
 ```
 
 `scripts/build.js` drives it; `scripts/pack.js` produces the `.plugin` archive.
+
+`scripts/gen-icons.js` is separate and run by hand (`npm run icons`). ONLYOFFICE
+wants three unrelated icon sets — a square plugin-list icon, a 120×60 store card
+banner, and per-button toolbar icons — each at five display scales. All are
+rasterised from SVG sources in `assets/`, and all must keep their alpha; a baked
+white background shows as a white block on the store card and on the dark theme.
 
 ## Known gaps
 

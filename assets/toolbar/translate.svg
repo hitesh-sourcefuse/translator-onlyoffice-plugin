@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+  <g fill="none" stroke="{{FG}}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4.5" width="9.5" height="9.5" rx="1.4"/>
+    <rect x="15.5" y="14" width="9.5" height="9.5" rx="1.4"/>
+    <path d="M12.5 9.25h6.75a1.6 1.6 0 0 1 1.6 1.6V14"/>
+    <path d="M18.6 11.9l2.25 2.4 2.25-2.4"/>
+  </g>
+  <text x="7.75" y="12.1" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif"
+        font-size="7.5" font-weight="700" fill="{{FG}}">文</text>
+  <text x="20.25" y="21.6" text-anchor="middle" font-family="Arial,Helvetica,sans-serif"
+        font-size="7.5" font-weight="700" fill="{{FG}}">A</text>
+</svg>

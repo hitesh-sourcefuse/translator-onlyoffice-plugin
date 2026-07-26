@@ -27,10 +27,12 @@
     "pack": "npm run build && node scripts/pack.js",
     "clean": "rm -rf dist *.plugin",
     "vendor-bergamot": "FILE=$(npm pack @mkljczk/bergamot-translator) && rm -rf vendors/bergamot-translator && mkdir -p vendors/bergamot-translator && tar -xzf \"$FILE\" -C vendors/bergamot-translator --strip-components=1 && rm \"$FILE\"",
-    "vendor-eld": "FILE=$(npm pack eld) && rm -rf vendors/eld && mkdir -p vendors/eld && tar -xzf \"$FILE\" -C vendors/eld --strip-components=1 && rm \"$FILE\""
+    "vendor-eld": "FILE=$(npm pack eld) && rm -rf vendors/eld && mkdir -p vendors/eld && tar -xzf \"$FILE\" -C vendors/eld --strip-components=1 && rm \"$FILE\"",
+    "icons": "node scripts/gen-icons.js"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.5",
+    "@resvg/resvg-js": "^2.6.2",
     "vite": "^8.1.5"
   }
 }

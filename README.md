@@ -25,6 +25,11 @@ machine, so it travels with the workbook when it is copied, emailed or renamed.
 Repeated text is translated once and reused; any translated cell can be reverted
 to its original.
 
+<p align="center">
+  <img src="docs/images/translation-panel.png" alt="Translating a Japanese cell into English" width="700">
+</p>
+
+
 ## Features
 
 - **Three engines** — offline (Bergamot), self-hosted (LibreTranslate), or any
@@ -129,6 +134,29 @@ By default translations are shown in the panel and the sheet is left untouched.
 Switch **Display Mode** to *Replace* in Settings to write translations into the
 cells themselves.
 
+## Screenshots
+
+The toolbar, under the **Cell Translator** group:
+
+<p align="center">
+  <img src="docs/images/toolbar.png" alt="Cell Translator toolbar buttons" width="640">
+</p>
+
+Settings — engine, quality, target language and downloaded models:
+
+<p align="center">
+  <img src="docs/images/settings-panel.png" alt="Cell Translator settings panel" width="420">
+</p>
+
+The plugin runs in the background, so it appears under **Background plugins**
+as well as in the Plugin Manager:
+
+<p align="center">
+  <img src="docs/images/background-plugins.png" alt="Cell Translator in the background plugins list" width="330">
+  <img src="docs/images/plugin-manager.png" alt="Cell Translator in the Plugin Manager" width="420">
+</p>
+
+
 ## Engines
 
 | Engine | Runs where | Needs | Notes |
@@ -165,9 +193,15 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full design.
 npm install
 npm run build       # bundle into dist/
 npm run pack        # build + zip into translator-plugin.plugin
+npm run icons       # re-rasterise icons from assets/*.svg
 npm run lint        # biome
 npm run lint:fix
 ```
+
+Icons are committed as PNGs because ONLYOFFICE wants a fixed set of sizes, but
+they are generated, not hand-drawn. The sources are `assets/icon.svg` (plugin
+list), `assets/icon-store.svg` (marketplace card) and `assets/toolbar/*.svg`
+(toolbar buttons). Edit those and run `npm run icons`.
 
 Source lives in `src/`, one directory per plugin window, each with a `main.js`
 entry that the build bundles into a single IIFE (the ONLYOFFICE plugin sandbox

@@ -3687,15 +3687,27 @@ function openSettingsPanel() {
 
 let toolbarRegistered = false;
 
+// Toolbar icons live under resources/icons/<theme>/big/. The editor fills in
+// the theme and the display scale itself, so one string covers every variant.
+function toolbarIcon(name) {
+    return (
+        "resources/icons/%theme-type%(light|dark)/big/" +
+        name +
+        "%scale%(default).png"
+    );
+}
+
 function registerToolbarOnce() {
     if (toolbarRegistered) return;
     toolbarRegistered = true;
 
     const mainBtn = new Asc.ButtonToolbar();
     mainBtn.text = "Cell Translator";
+    mainBtn.icons = toolbarIcon("translate");
 
     const executeTranslationBtn = new Asc.ButtonToolbar(mainBtn);
     executeTranslationBtn.text = "Execute Translation";
+    executeTranslationBtn.icons = toolbarIcon("translate");
     executeTranslationBtn.attachOnClick(() => {
         log("toolbar: execute translation");
         openPanel();
@@ -3703,6 +3715,7 @@ function registerToolbarOnce() {
 
     const syncBtn = new Asc.ButtonToolbar(mainBtn);
     syncBtn.text = "Sync";
+    syncBtn.icons = toolbarIcon("sync");
     syncBtn.attachOnClick(() => {
         log("toolbar: sync");
         openSyncPanel();
@@ -3710,6 +3723,7 @@ function registerToolbarOnce() {
 
     const settingsBtn = new Asc.ButtonToolbar(mainBtn);
     settingsBtn.text = "Settings";
+    settingsBtn.icons = toolbarIcon("settings");
     settingsBtn.attachOnClick(() => {
         log("toolbar: settings");
         openSettingsPanel();
@@ -3717,6 +3731,7 @@ function registerToolbarOnce() {
 
     const historyBtn = new Asc.ButtonToolbar(mainBtn);
     historyBtn.text = "History";
+    historyBtn.icons = toolbarIcon("history");
     historyBtn.attachOnClick(() => {
         log("toolbar: history");
         openTranslationPanel();

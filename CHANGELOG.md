@@ -32,6 +32,14 @@ Prepares the plugin for submission to the ONLYOFFICE Plugin Marketplace.
 - Marketplace listing icons under `resources/store/icons`, sized 120×60 and
   up. The listing card wants a landscape banner, not the square icon the
   editor toolbar uses — `ai` and `zotero` both ship 120×60 / 240×120.
+- Toolbar button icons. *Execute Translation*, *Sync*, *Settings* and
+  *History* were text-only. They are line art so they read alongside the
+  editor's own toolbar icons, and they invert between the light and dark
+  themes.
+- Marketplace listing screenshots under `resources/store/screenshots`.
+- `npm run icons` regenerates every icon set from the SVG sources in
+  `assets/`. The PNGs are committed because ONLYOFFICE wants a fixed set of
+  sizes, but they are generated rather than hand-drawn.
 
 ## [1.0.1] — 2026-07-25
 
