@@ -30,7 +30,7 @@
     "vendor-eld": "FILE=$(npm pack eld) && rm -rf vendors/eld && mkdir -p vendors/eld && tar -xzf \"$FILE\" -C vendors/eld --strip-components=1 && rm \"$FILE\""
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.10",
+    "@biomejs/biome": "^2.5.5",
     "vite": "^8.0.3"
   }
 }
