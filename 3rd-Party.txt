@@ -1,0 +1,33 @@
+Cell Translator uses the following third-party components:
+
+1. Bergamot Translator (https://github.com/browsermt/bergamot-translator)
+   License: Mozilla Public License 2.0
+   Copyright: Bergamot Project Contributors
+   Bundled as WebAssembly. Redistributed via the npm package
+   @mkljczk/bergamot-translator, which ships no licence file of its own; the
+   terms above are those of the upstream project it is built from.
+
+2. Marian NMT (https://marian-nmt.github.io/)
+   License: MIT
+   Copyright: Microsoft Corporation and contributors
+   Compiled into the Bergamot WebAssembly module above.
+
+3. Firefox Translations Models (https://github.com/mozilla/firefox-translations-models)
+   License: Creative Commons Attribution-ShareAlike 4.0 International
+   Copyright: Mozilla Foundation
+   Not bundled. Downloaded on first use and cached in the browser's IndexedDB.
+
+4. Efficient Language Detector (https://github.com/nitotm/efficient-language-detector-js)
+   License: Apache License 2.0
+   Copyright: Nito T.M.
+   Used for offline source-language detection.
+
+Cell Translator itself is licensed under the MIT License.
+Copyright (c) 2026 Hitesh Baliyan
+
+The Bergamot Project has received funding from the European Union's Horizon 2020
+research and innovation programme under grant agreement No 825303.
+
+Optional services contacted over HTTP only, with no code included here:
+LibreTranslate (https://libretranslate.com/, AGPL-3.0) and any
+OpenAI-compatible endpoint the user configures.
