@@ -47,18 +47,73 @@ to its original.
 
 ## Install
 
-Download `translator-plugin.plugin` from the
-[latest release](../../releases/latest) and open it with ONLYOFFICE, or build it
-yourself:
+There is no marketplace listing yet, so installation is manual. Download
+`cell-translator-vX.Y.Z.plugin` from the [latest release](../../releases/latest),
+or build it yourself (see [Development](#development)).
+
+Every release also ships a `.sha256` file. Worth checking, since the plugin runs
+inside your editor:
 
 ```bash
-git clone <this-repo>
-cd translator-onlyoffice-plugin
-npm install
-npm run pack        # produces translator-plugin.plugin
+shasum -a 256 -c cell-translator-v1.0.2.plugin.sha256
 ```
 
-Then in ONLYOFFICE: **Plugins → Settings → Add plugin** and select the file.
+### Desktop Editors
+
+1. Open the **Plugins** tab
+2. Click **Plugin Manager**
+3. Go to the **My plugins** tab
+4. Click **Install plugin manually**
+5. Select the `.plugin` file and click **Open**
+
+It becomes available immediately, in open documents and future ones.
+
+If you would rather drop it in as a folder, unzip the `.plugin` (it is a plain
+zip) into a directory named `cell-translator` under:
+
+```
+Windows   %ProgramFiles%\ONLYOFFICE\DesktopEditors\editors\sdkjs-plugins\
+macOS     ~/Library/Application Support/asc.onlyoffice.ONLYOFFICE/data/sdkjs-plugins/
+Linux     /opt/onlyoffice/desktopeditors/editors/sdkjs-plugins/
+```
+
+### ONLYOFFICE Docs (self-hosted)
+
+Docs takes a plugin **folder**, not a `.plugin` archive, so unzip it first:
+
+```bash
+mkdir cell-translator
+unzip cell-translator-v1.0.2.plugin -d cell-translator
+```
+
+Then move it into the plugins directory:
+
+```bash
+# Linux
+sudo mv cell-translator /var/www/onlyoffice/documentserver/sdkjs-plugins/
+
+# Windows
+move cell-translator %ProgramFiles%\ONLYOFFICE\DocumentServer\sdkjs-plugins\
+```
+
+On Linux, restart the services if the plugin does not appear:
+
+```bash
+sudo systemctl restart ds-converter ds-docservice ds-example ds-metrics
+```
+
+The plugin is then available to every user of that server.
+
+For Docker, copy the folder to the same path inside the container, or mount it
+there. ONLYOFFICE publishes no official Docker instructions for this, so treat
+the following as a starting point rather than a documented procedure:
+
+```bash
+docker cp cell-translator \
+  <container>:/var/www/onlyoffice/documentserver/sdkjs-plugins/
+```
+
+Cloud (onlyoffice.com) installations cannot take manually installed plugins.
 
 ## Usage
 
